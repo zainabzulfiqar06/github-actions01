@@ -4,7 +4,7 @@ on:
     types: [opened]
 
 permissions:
-  issues: write  
+  issues: write 
 
 jobs:
   job1:
@@ -17,7 +17,7 @@ jobs:
         run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
 
-      - name: Create comment
+      - name: Create comment using GitHub Action
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
@@ -38,7 +38,7 @@ jobs:
           https://api.github.com/repos/${ORGANIZATION}/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
           --header "Authorization: token $GITHUB_TOKEN" \
           --header "Accept: application/vnd.github.v3+json" \
-          --input '{"body": "Comment from API call"}'
+          -F body="Comment from API call"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
           ORGANIZATION: ${{ github.repository_owner }}  
