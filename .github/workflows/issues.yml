@@ -1,0 +1,11 @@
+name: Issues
+on:
+  issues:
+    types: [opened]
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "not good content"
+        run: echo '${{ toJSON(github.event) }}' | jq
+        shell: bash
