@@ -1,12 +1,19 @@
 name: First-job
-on: [push, pull_request]
-  branches:
-    - main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-     -  uses: active/checkout@v3
-        run: echo "testing"  
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
+      - name: Run Test
+        run: echo "testing"
