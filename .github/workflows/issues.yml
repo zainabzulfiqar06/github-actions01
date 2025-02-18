@@ -2,13 +2,18 @@ name: Issues
 on:
   issues:
     types: [opened]
+
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: "not good content"
+      - name: Install jq  
+        run: sudo apt-get install jq -y
+
+      - name: Log issue event data
         run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
+
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
         with:
